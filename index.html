@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adelka4745 | Официальный сайт разработчика</title>
+    <style>
+        :root {
+            --purple-glow: #bc13fe;
+            --blue-glow: #08f7fe;
+            --bg-color: #0d0d13;
+            --card-bg: #141421;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Неоновый светящийся заголовок */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--purple-glow),
+                0 0 40px var(--purple-glow),
+                0 0 60px var(--purple-glow);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--blue-glow);
+            text-shadow: 0 0 10px var(--blue-glow);
+            font-weight: bold;
+        }
+
+        /* Главный контейнер блоков */
+        main {
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 2fr 1fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        /* Стили неоновых карточек */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .purple-neon {
+            border: 2px solid var(--purple-glow);
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3), inset 0 0 15px rgba(188, 19, 254, 0.2);
+        }
+
+        .blue-neon {
+            border: 2px solid var(--blue-glow);
+            box-shadow: 0 0 15px rgba(8, 247, 254, 0.3), inset 0 0 15px rgba(8, 247, 254, 0.2);
+        }
+
+        .red-neon {
+            border: 2px solid #ff0055;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3), inset 0 0 15px rgba(255, 0, 85, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .purple-neon h2 {
+            color: #fff;
+            text-shadow: 0 0 8px var(--purple-glow);
+        }
+
+        .blue-neon h2 {
+            color: #fff;
+            text-shadow: 0 0 8px var(--blue-glow);
+        }
+
+        .red-neon h2 {
+            color: #fff;
+            text-shadow: 0 0 8px #ff0055;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #d1d1e0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .blue-neon li::before {
+            content: "➔";
+            position: absolute;
+            left: 0;
+            color: var(--blue-glow);
+            text-shadow: 0 0 5px var(--blue-glow);
+        }
+
+        /* Секция черепах */
+        .turtle-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .turtle-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--blue-glow);
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .turtle-dead {
+            border-left-color: #ff0055;
+            opacity: 0.7;
+        }
+
+        .turtle-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .turtle-dead .turtle-title {
+            color: #ff0055;
+            text-shadow: 0 0 5px #ff0055;
+        }
+
+        .turtle-alive .turtle-title {
+            color: var(--blue-glow);
+            text-shadow: 0 0 5px var(--blue-glow);
+        }
+
+        /* Футер */
+        footer {
+            margin-top: auto;
+            padding: 30px;
+            text-align: center;
+            color: #555577;
+            font-size: 0.9rem;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>adelka4745</h1>
+        <div class="subtitle">VR & OS Developer Портфолио</div>
+    </header>
+
+    <main>
+        <!-- Манифест против Реддита -->
+        <div class="card red-neon full-width">
+            <h2>🚫 ОТВЕТ ТУПОМУ РЕДДИТУ И ХЕЙТЕРАМ</h2>
+            <p><strong>Пока токсичные мужики кидали крысиные репорты, а их тупые автоматические боты выписывали баны — я просто продолжал кодить!</strong></p>
+            <p>Вы думали, что забанив аккаунт, вы остановите разработку? Как бы не так! Мои мозги и навыки программирования вы забанить не сможете. Мой старый профиль уничтожен роботами, поэтому отныне весь самый сочный контент, видеоролики, скриншоты тестов и файлы моих проектов переезжают сюда — на свободный GitHub, где нет глупой модерации!</p>
+        </div>
+
+        <!-- Раздел с проектами -->
+        <div class="card blue-neon">
+            <h2>🛠️ Мои Главные Проекты</h2>
+            <ul>
+                <li><strong>ShellOS</strong> — разработка собственной полноценной операционной системы на MangoCode. Продумываю логику, интерфейс и внутреннюю структуру.</li>
+                <li><strong>Unity & VR</strong> — создание игр, механик и тесты виртуальной реальности под гарнитуру Meta Quest 2.</li>
+                <li><strong>В планах</strong> — создание собственного языка программирования с нуля, чтобы не зависеть от чужих тяжелых движков.</li>
+            </ul>
+        </div>
+
+        <!-- Уголок питомцев (Черепахи) -->
+        <div class="card purple-neon">
+            <h2>🐢 Террариум / Мои Питомцы</h2>
+            <div class="turtle-container">
+                <div class="turtle-box turtle-alive">
+                    <div class="turtle-title">Красноух 🟢</div>
+                    <p>Мой живой домашний питомец. Красноухая черепаха, которая живёт в аквариуме и следит за тем, как я пишу код для ShellOS.</p>
+                </div>
+                <div class="turtle-box turtle-dead">
+                    <div class="turtle-title">Краснопук (R.I.P.) 🔴</div>
+                    <p>Мой прошлый питомец, который, к сожалению, сдох. Память о нём навсегда останется в коде и на этой странице.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 adelka4745. Написано на VS Code (github.dev) без использования левых серверов.
+    </footer>
+
+</body>
+</html>
