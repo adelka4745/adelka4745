@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>adelka4745Toolkit</RootNamespace>
+    <AssemblyName>adelka4745-Toolkit</AssemblyName>
+    <AssemblyTitle>adelka4745 Toolkit</AssemblyTitle>
+    <Product>adelka4745 Toolkit</Product>
+    <Company>adelka4745</Company>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+</Project>
