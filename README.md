@@ -1,16 +1,17 @@
-## Hi there 👋
+## Привет 👋
 
-<!--
-**adelka4745/adelka4745** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+---
 
-Here are some ideas to get you started:
+## Здесь будут все проекты на Github.
+Почему же? Модераторы Reddit забанили меня.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+---
+
+## Мои проекты
+* **ShellOS** пишу свою операционку на своём языке MangoCode. Но язык программирования ещё не придуман😁
+* **Unity & VR** разрабатываю игры или программы для моего Meta Quest 2.
+* **Инструменты** Visual Studio 2026, Git, WSL, Repo, Unity. Поделены на разных ноутбуках типо.
+
+---
+
+## Поехали создавать!
