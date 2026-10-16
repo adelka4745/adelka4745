@@ -41,6 +41,8 @@
 
 - [**adelka4745**](https://github.com/adelka4745/adelka4745) — мои проекты теперь живут именно здесь как главность. `HTML`
 - [**adelka4745-Toolkit**](https://github.com/adelka4745/adelka4745-Toolkit) — WinForms + WebView2 app packaged as MSIX/APPX for Windows, with HTML/CSS/JS frontend. `CSS`
+- [**ShellVR**](https://github.com/adelka4745/ShellVR)
+- [""ShellClock**](https://github.com/adelka4745/ShellClock) - часики.
 
 ---
 
