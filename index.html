@@ -5,1125 +5,461 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>adelka4745 | VR & OS Developer</title>
     <style>
-        :root {
-            --purple-glow: #bc13fe;
-            --blue-glow: #08f7fe;
-            --red-glow: #ff0055;
-            --green-glow: #00ff88;
-            --orange-glow: #ff8c00;
-            --bg-color: #0a0a0f;
-            --card-bg: #12121c;
-            --card-bg2: #1a1a2e;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(188, 19, 254, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(8, 247, 254, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.04) 0%, transparent 50%);
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            text-align: center;
-            padding: 50px 20px 30px;
-            width: 100%;
-            max-width: 1100px;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 20px var(--purple-glow),
-                0 0 40px var(--purple-glow),
-                0 0 80px var(--purple-glow);
-            margin-bottom: 15px;
-            animation: flicker 3s infinite alternate;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            95% { opacity: 1; }
-            96% { opacity: 0.8; }
-            97% { opacity: 1; }
-            98% { opacity: 0.9; }
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            color: var(--blue-glow);
-            text-shadow: 0 0 10px var(--blue-glow);
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .status-bar {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--green-glow);
-            border-radius: 20px;
-            padding: 6px 16px;
-            font-size: 0.85rem;
-            color: var(--green-glow);
-            text-shadow: 0 0 5px var(--green-glow);
-            margin-bottom: 20px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--green-glow);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--green-glow);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* ===== GITHUB BADGE ===== */
-        .github-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(188, 19, 254, 0.1);
-            border: 2px solid var(--purple-glow);
-            border-radius: 30px;
-            padding: 10px 24px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
-        }
-
-        .github-badge:hover {
-            background: rgba(188, 19, 254, 0.25);
-            box-shadow: 0 0 30px rgba(188, 19, 254, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .github-badge svg {
-            width: 24px;
-            height: 24px;
-            fill: #fff;
-        }
-
-        /* ===== TABS ===== */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 20px 30px;
-            max-width: 1100px;
-            width: 100%;
-        }
-
-        .tab-btn {
-            background: var(--card-bg);
-            color: #aaa;
-            border: 2px solid #2a2a3e;
-            padding: 12px 22px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .tab-btn:hover {
-            border-color: var(--purple-glow);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.4);
-        }
-
-        .tab-btn.active {
-            background: var(--card-bg2);
-            border-color: var(--blue-glow);
-            color: var(--blue-glow);
-            box-shadow: 0 0 20px rgba(8, 247, 254, 0.5);
-            text-shadow: 0 0 8px var(--blue-glow);
-        }
-
-        /* ===== MAIN CONTENT ===== */
-        main {
-            width: 100%;
-            max-width: 1100px;
-            padding: 0 20px 60px;
-        }
-
-        .tab-content {
-            display: none;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .tab-content.active {
-            display: grid;
-        }
-
-        @media (min-width: 768px) {
-            .tab-content.active {
-                grid-template-columns: 1.5fr 1fr;
-            }
-            .full-width {
-                grid-column: span 2;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== CARDS ===== */
-        .card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 28px;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .purple-neon {
-            border: 2px solid var(--purple-glow);
-            box-shadow: 0 0 20px rgba(188, 19, 254, 0.25), inset 0 0 20px rgba(188, 19, 254, 0.1);
-        }
-
-        .blue-neon {
-            border: 2px solid var(--blue-glow);
-            box-shadow: 0 0 20px rgba(8, 247, 254, 0.25), inset 0 0 20px rgba(8, 247, 254, 0.1);
-        }
-
-        .red-neon {
-            border: 2px solid var(--red-glow);
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.25), inset 0 0 20px rgba(255, 0, 85, 0.1);
-        }
-
-        .green-neon {
-            border: 2px solid var(--green-glow);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.25), inset 0 0 20px rgba(0, 255, 136, 0.1);
-        }
-
-        .orange-neon {
-            border: 2px solid var(--orange-glow);
-            box-shadow: 0 0 20px rgba(255, 140, 0, 0.25), inset 0 0 20px rgba(255, 140, 0, 0.1);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .purple-neon:hover { box-shadow: 0 0 30px rgba(188, 19, 254, 0.5); }
-        .blue-neon:hover { box-shadow: 0 0 30px rgba(8, 247, 254, 0.5); }
-        .red-neon:hover { box-shadow: 0 0 30px rgba(255, 0, 85, 0.5); }
-        .green-neon:hover { box-shadow: 0 0 30px rgba(0, 255, 136, 0.5); }
-        .orange-neon:hover { box-shadow: 0 0 30px rgba(255, 140, 0, 0.5); }
-
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .purple-neon h2 { color: #fff; text-shadow: 0 0 8px var(--purple-glow); }
-        .blue-neon h2 { color: #fff; text-shadow: 0 0 8px var(--blue-glow); }
-        .red-neon h2 { color: #fff; text-shadow: 0 0 8px var(--red-glow); }
-        .green-neon h2 { color: #fff; text-shadow: 0 0 8px var(--green-glow); }
-        .orange-neon h2 { color: #fff; text-shadow: 0 0 8px var(--orange-glow); }
-
-        h3 {
-            font-size: 1.1rem;
-            margin: 15px 0 8px;
-            color: #fff;
-        }
-
-        p {
-            line-height: 1.7;
-            margin-bottom: 14px;
-            color: #c8c8dc;
-            font-size: 0.98rem;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        li {
-            margin-bottom: 12px;
-            padding-left: 22px;
-            position: relative;
-            color: #c8c8dc;
-            line-height: 1.6;
-        }
-
-        .blue-neon li::before {
-            content: "➔";
-            position: absolute;
-            left: 0;
-            color: var(--blue-glow);
-            text-shadow: 0 0 5px var(--blue-glow);
-        }
-
-        .purple-neon li::before {
-            content: "◆";
-            position: absolute;
-            left: 0;
-            color: var(--purple-glow);
-            text-shadow: 0 0 5px var(--purple-glow);
-        }
-
-        .green-neon li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--green-glow);
-            text-shadow: 0 0 5px var(--green-glow);
-        }
-
-        .orange-neon li::before {
-            content: "▶";
-            position: absolute;
-            left: 0;
-            color: var(--orange-glow);
-            text-shadow: 0 0 5px var(--orange-glow);
-        }
-
-        /* ===== TURTLE SECTION ===== */
-        .turtle-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .turtle-box {
-            background: rgba(255, 255, 255, 0.04);
-            border-left: 4px solid var(--blue-glow);
-            padding: 14px 18px;
-            border-radius: 0 10px 10px 0;
-            transition: background 0.3s;
-        }
-
-        .turtle-box:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .turtle-dead {
-            border-left-color: var(--red-glow);
-            opacity: 0.75;
-        }
-
-        .turtle-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 6px;
-        }
-
-        .turtle-dead .turtle-title {
-            color: var(--red-glow);
-            text-shadow: 0 0 6px var(--red-glow);
-        }
-
-        .turtle-alive .turtle-title {
-            color: var(--blue-glow);
-            text-shadow: 0 0 6px var(--blue-glow);
-        }
-
-        /* ===== SPECS / STATS ===== */
-        .spec-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .spec-item {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 8px;
-            padding: 12px;
-            border-left: 3px solid var(--purple-glow);
-        }
-
-        .spec-label {
-            font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .spec-value {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        /* ===== TIMELINE ===== */
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 8px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--purple-glow), var(--blue-glow));
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -26px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--bg-color);
-            border: 2px solid var(--blue-glow);
-            box-shadow: 0 0 10px var(--blue-glow);
-        }
-
-        .timeline-date {
-            font-size: 0.8rem;
-            color: var(--blue-glow);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        /* ===== BADGE ===== */
-        .badge {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-right: 6px;
-            margin-bottom: 6px;
-        }
-
-        .badge-purple {
-            background: rgba(188, 19, 254, 0.15);
-            border: 1px solid var(--purple-glow);
-            color: var(--purple-glow);
-        }
-
-        .badge-blue {
-            background: rgba(8, 247, 254, 0.15);
-            border: 1px solid var(--blue-glow);
-            color: var(--blue-glow);
-        }
-
-        .badge-green {
-            background: rgba(0, 255, 136, 0.15);
-            border: 1px solid var(--green-glow);
-            color: var(--green-glow);
-        }
-
-        .badge-red {
-            background: rgba(255, 0, 85, 0.15);
-            border: 1px solid var(--red-glow);
-            color: var(--red-glow);
-        }
-
-        .badge-orange {
-            background: rgba(255, 140, 0, 0.15);
-            border: 1px solid var(--orange-glow);
-            color: var(--orange-glow);
-        }
-
-        /* ===== REPO CARDS ===== */
-        .repo-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(188, 19, 254, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .repo-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--purple-glow);
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
-        }
-
-        .repo-name {
-            font-weight: bold;
-            color: var(--blue-glow);
-            font-size: 1.05rem;
-            margin-bottom: 5px;
-        }
-
-        .repo-desc {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 8px;
-        }
-
-        .repo-lang {
-            display: inline-block;
-            font-size: 0.75rem;
-            color: var(--green-glow);
-            border: 1px solid var(--green-glow);
-            border-radius: 12px;
-            padding: 2px 10px;
-        }
-
-        /* ===== TOOLS ===== */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .tool-item {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 8px;
-            padding: 14px;
-            text-align: center;
-            border: 1px solid rgba(8, 247, 254, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .tool-item:hover {
-            border-color: var(--blue-glow);
-            box-shadow: 0 0 15px rgba(8, 247, 254, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .tool-icon {
-            font-size: 1.8rem;
-            margin-bottom: 6px;
-        }
-
-        .tool-name {
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        /* ===== LINK BUTTONS ===== */
-        .link-btn {
-            display: inline-block;
-            padding: 12px 24px;
-            margin: 8px 8px 8px 0;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .link-purple {
-            background: rgba(188, 19, 254, 0.15);
-            border: 2px solid var(--purple-glow);
-            color: var(--purple-glow);
-        }
-
-        .link-purple:hover {
-            background: rgba(188, 19, 254, 0.3);
-            box-shadow: 0 0 20px rgba(188, 19, 254, 0.6);
-            color: #fff;
-        }
-
-        .link-blue {
-            background: rgba(8, 247, 254, 0.15);
-            border: 2px solid var(--blue-glow);
-            color: var(--blue-glow);
-        }
-
-        .link-blue:hover {
-            background: rgba(8, 247, 254, 0.3);
-            box-shadow: 0 0 20px rgba(8, 247, 254, 0.6);
-            color: #fff;
-        }
-
-        /* ===== CONTRIBUTION ===== */
-        .contribution-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-        }
-
-        .contribution-label {
-            font-size: 0.85rem;
-            color: #888;
-            min-width: 100px;
-        }
-
-        .contribution-fill {
-            flex: 1;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .contribution-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--purple-glow), var(--blue-glow));
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(8, 247, 254, 0.6);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            margin-top: auto;
-            padding: 35px 20px;
-            text-align: center;
-            color: #555577;
-            font-size: 0.9rem;
-            width: 100%;
-            max-width: 1100px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-glow {
-            color: var(--purple-glow);
-            text-shadow: 0 0 8px var(--purple-glow);
-            font-weight: bold;
-        }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--purple-glow);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--blue-glow);
-        }
+        :root { --bg: #0a0a0f; --card: #12121c; --card2: #1a1a2e; --purple: #bc13fe; --blue: #08f7fe; --green: #00ff88; --red: #ff0055; --orange: #ff8c00; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg); color: #fff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; background-image: radial-gradient(circle at 10% 20%, rgba(188,19,254,.08) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(8,247,254,.08) 0%, transparent 40%); }
+        header { text-align: center; padding: 40px 20px 20px; width: 100%; max-width: 1100px; }
+        h1 { font-size: 3rem; text-shadow: 0 0 20px var(--purple); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; animation: flicker 3s infinite alternate; }
+        @keyframes flicker { 0%, 100% { opacity: 1; } 95% { opacity: 1; } 96% { opacity: .8; } 97% { opacity: 1; } 98% { opacity: .9; } }
+        .subtitle { color: var(--blue); text-shadow: 0 0 10px var(--blue); font-weight: bold; margin-bottom: 15px; }
+        .status { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,255,136,.1); border: 1px solid var(--green); border-radius: 20px; padding: 4px 14px; font-size: .85rem; color: var(--green); margin-bottom: 15px; }
+        .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+        
+        .badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(188,19,254,.1); border: 2px solid var(--purple); border-radius: 30px; padding: 8px 20px; text-decoration: none; color: #fff; font-weight: bold; transition: .3s; margin-bottom: 20px; }
+        .badge:hover { background: rgba(188,19,254,.25); box-shadow: 0 0 25px rgba(188,19,254,.6); }
+        .badge svg { width: 20px; height: 20px; fill: #fff; }
+
+        .tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 0 20px 20px; max-width: 1100px; }
+        .tab-btn { background: var(--card); color: #aaa; border: 2px solid #2a2a3e; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: .3s; text-transform: uppercase; font-size: .85rem; }
+        .tab-btn.active, .tab-btn:hover { border-color: var(--blue); color: var(--blue); box-shadow: 0 0 15px rgba(8,247,254,.4); }
+
+        main { width: 100%; max-width: 1100px; padding: 0 20px 40px; }
+        .tab-content { display: none; grid-template-columns: 1fr; gap: 20px; animation: fadeIn .4s ease; }
+        .tab-content.active { display: grid; }
+        @media (min-width: 768px) { .tab-content.active { grid-template-columns: 1fr 1fr; } .full { grid-column: span 2; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card { background: var(--card); border-radius: 12px; padding: 20px; border: 2px solid var(--purple); box-shadow: 0 0 15px rgba(188,19,254,.15); transition: .3s; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(188,19,254,.3); }
+        .card.blue { border-color: var(--blue); box-shadow: 0 0 15px rgba(8,247,254,.15); }
+        .card.blue:hover { box-shadow: 0 0 25px rgba(8,247,254,.3); }
+        .card.red { border-color: var(--red); box-shadow: 0 0 15px rgba(255,0,85,.15); }
+        .card.red:hover { box-shadow: 0 0 25px rgba(255,0,85,.3); }
+        .card.green { border-color: var(--green); box-shadow: 0 0 15px rgba(0,255,136,.15); }
+        .card.green:hover { box-shadow: 0 0 25px rgba(0,255,136,.3); }
+        .card.orange { border-color: var(--orange); box-shadow: 0 0 15px rgba(255,140,0,.15); }
+        .card.orange:hover { box-shadow: 0 0 25px rgba(255,140,0,.3); }
+
+        h2 { font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .card h2 { color: #fff; text-shadow: 0 0 8px var(--purple); }
+        .card.blue h2 { text-shadow: 0 0 8px var(--blue); }
+        .card.red h2 { text-shadow: 0 0 8px var(--red); }
+        .card.green h2 { text-shadow: 0 0 8px var(--green); }
+        .card.orange h2 { text-shadow: 0 0 8px var(--orange); }
+
+        p, li { color: #c8c8dc; line-height: 1.6; margin-bottom: 10px; font-size: .95rem; }
+        ul { list-style: none; }
+        li { padding-left: 20px; position: relative; }
+        li::before { content: "◆"; position: absolute; left: 0; color: var(--purple); }
+        .card.blue li::before { content: "➔"; color: var(--blue); }
+        .card.green li::before { content: "✓"; color: var(--green); }
+        .card.orange li::before { content: "▶"; color: var(--orange); }
+
+        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .spec-item { background: rgba(255,255,255,.04); border-radius: 8px; padding: 10px; border-left: 3px solid var(--purple); }
+        .spec-label { font-size: .7rem; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+        .spec-value { font-size: .95rem; font-weight: bold; }
+
+        .repo-card { background: rgba(255,255,255,.03); border-radius: 8px; padding: 12px; margin-bottom: 10px; border: 1px solid rgba(188,19,254,.2); transition: .3s; }
+        .repo-card:hover { background: rgba(255,255,255,.06); border-color: var(--purple); box-shadow: 0 0 15px rgba(188,19,254,.3); }
+        .repo-name { font-weight: bold; color: var(--blue); font-size: 1rem; margin-bottom: 4px; }
+        .repo-desc { font-size: .85rem; color: #aaa; margin-bottom: 6px; }
+        .repo-lang { font-size: .7rem; color: var(--green); border: 1px solid var(--green); border-radius: 12px; padding: 2px 8px; }
+
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 10px; }
+        .tool-item { background: rgba(255,255,255,.04); border-radius: 8px; padding: 12px; text-align: center; border: 1px solid rgba(8,247,254,.2); transition: .3s; }
+        .tool-item:hover { border-color: var(--blue); box-shadow: 0 0 15px rgba(8,247,254,.4); transform: translateY(-3px); }
+        .tool-icon { font-size: 1.5rem; margin-bottom: 4px; }
+        .tool-name { font-size: .8rem; font-weight: bold; }
+
+        .link-btn { display: inline-block; padding: 10px 20px; margin: 5px 5px 5px 0; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: .8rem; border: 2px solid var(--purple); color: var(--purple); transition: .3s; }
+        .link-btn:hover { background: var(--purple); color: #fff; box-shadow: 0 0 20px var(--purple); }
+        .link-tg { border-color: var(--blue); color: var(--blue); }
+        .link-tg:hover { background: var(--blue); color: #000; box-shadow: 0 0 20px var(--blue); }
+
+        .turtle-box { background: rgba(255,255,255,.04); border-left: 4px solid var(--blue); padding: 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px; }
+        .turtle-dead { border-left-color: var(--red); opacity: .75; }
+        .turtle-title { font-weight: bold; font-size: 1rem; margin-bottom: 4px; color: var(--blue); }
+        .turtle-dead .turtle-title { color: var(--red); }
+
+        .timeline { position: relative; padding-left: 20px; }
+        .timeline::before { content: ""; position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--purple), var(--blue)); }
+        .timeline-item { position: relative; margin-bottom: 15px; }
+        .timeline-item::before { content: ""; position: absolute; left: -22px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--blue); box-shadow: 0 0 8px var(--blue); }
+        .timeline-date { font-size: .75rem; color: var(--blue); text-transform: uppercase; margin-bottom: 2px; }
+
+        .bar-wrap { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+        .bar-label { font-size: .8rem; color: #888; min-width: 90px; }
+        .bar-fill { flex: 1; height: 8px; background: rgba(255,255,255,.05); border-radius: 4px; overflow: hidden; }
+        .bar-progress { height: 100%; background: linear-gradient(90deg, var(--purple), var(--blue)); border-radius: 4px; }
+
+        footer { margin-top: auto; padding: 20px; color: #555; font-size: .85rem; border-top: 1px solid #222; width: 100%; text-align: center; }
+        .glow { color: var(--purple); text-shadow: 0 0 8px var(--purple); font-weight: bold; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>adelka4745</h1>
-        <div class="subtitle">VR & OS Developer Портфолио</div>
-        <div class="status-bar">
-            <span class="status-dot"></span>
-            Система онлайн — 2026
-        </div>
-        <br>
-        <a href="https://github.com/adelka4745" class="github-badge" target="_blank">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-            github.com/adelka4745
-        </a>
-    </header>
+<header>
+    <h1>adelka4745</h1>
+    <div class="subtitle">VR & OS Developer Портфолио</div>
+    <div class="status"><span class="dot"></span> Система онлайн — 2026</div>
+    <br>
+    <a href="https://github.com/adelka4745" class="badge" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        github.com/adelka4745
+    </a>
+</header>
 
-    <!-- ===== TABS NAVIGATION ===== -->
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="tab-main">🏠 Главная</button>
-        <button class="tab-btn" data-tab="tab-projects">🛠️ Проекты</button>
-        <button class="tab-btn" data-tab="tab-repos">📦 Репозитории</button>
-        <button class="tab-btn" data-tab="tab-tech">💻 Техника</button>
-        <button class="tab-btn" data-tab="tab-tools">🔧 Инструменты</button>
-        <button class="tab-btn" data-tab="tab-turtles">🐢 Черепахи</button>
-        <button class="tab-btn" data-tab="tab-about">👤 Обо мне</button>
+<div class="tabs">
+    <button class="tab-btn active" data-tab="tab-main">🏠 Главная</button>
+    <button class="tab-btn" data-tab="tab-projects">🛠️ Проекты</button>
+    <button class="tab-btn" data-tab="tab-repos">📦 Репозитории</button>
+    <button class="tab-btn" data-tab="tab-tech">💻 Техника</button>
+    <button class="tab-btn" data-tab="tab-tools">🔧 Инструменты</button>
+    <button class="tab-btn" data-tab="tab-turtles">🐢 Черепахи</button>
+    <button class="tab-btn" data-tab="tab-about">👤 Обо мне</button>
+</div>
+
+<main>
+    <!-- ГЛАВНАЯ -->
+    <div class="tab-content active" id="tab-main">
+        <div class="card red full">
+            <h2>🚫 ОТВЕТ ТУПОМУ РЕДДИТУ И ХЕЙТЕРАМ</h2>
+            <p><strong>Пока токсичные мужики кидали крысиные репорты, а их тупые автоматические боты выписывали баны — я просто продолжал кодить!</strong></p>
+            <p>Вы думали, что забанив аккаунт, вы остановите разработку? Как бы не так! Мои мозги и навыки программирования вы забанить не сможете. Мой старый профиль уничтожен роботами, поэтому отныне весь самый сочный контент, видеоролики, скриншоты тестов и файлы моих проектов переезжают сюда — на свободный GitHub, где нет глупой модерации!</p>
+            <p><em>«Здесь будут все проекты на GitHub. Почему же? Модераторы Reddit забанили меня.» — из README</em></p>
+        </div>
+
+        <div class="card blue">
+            <h2>⚡ Что нового</h2>
+            <ul>
+                <li>Создан репозиторий <strong>ShellClock</strong> (Kotlin) — часы для Android.</li>
+                <li>Добавлен репозиторий <strong>ShellVR</strong> — VR-проекты.</li>
+                <li>Создан репозиторий <strong>ActiveRepos</strong> (HTML).</li>
+                <li>Контрибуции выросли до <strong>41</strong> за год.</li>
+            </ul>
+        </div>
+
+        <div class="card green">
+            <h2>📊 Статус</h2>
+            <div class="spec-grid">
+                <div class="spec-item"><div class="spec-label">ShellOS</div><div class="spec-value">В разработке</div></div>
+                <div class="spec-item"><div class="spec-label">ShellClock</div><div class="spec-value">v5 (Kotlin)</div></div>
+                <div class="spec-item"><div class="spec-label">VR-проекты</div><div class="spec-value">Тестирование</div></div>
+                <div class="spec-item"><div class="spec-label">GitHub Pages</div><div class="spec-value">Онлайн</div></div>
+            </div>
+        </div>
+
+        <div class="card full">
+            <h2>📈 Активность на GitHub</h2>
+            <p>41 контрибуция за последний год. 4 публичных репозитория.</p>
+            <div class="bar-wrap"><span class="bar-label">Ноябрь 2026</span><div class="bar-fill"><div class="bar-progress" style="width: 100%;"></div></div></div>
+            <div class="bar-wrap"><span class="bar-label">Октябрь 2026</span><div class="bar-fill"><div class="bar-progress" style="width: 80%;"></div></div></div>
+            <div class="bar-wrap"><span class="bar-label">Сентябрь 2026</span><div class="bar-fill"><div class="bar-progress" style="width: 40%;"></div></div></div>
+        </div>
     </div>
 
-    <main>
-        <!-- ========== TAB: ГЛАВНАЯ ========== -->
-        <div class="tab-content active" id="tab-main">
-            <div class="card red-neon full-width">
-                <h2>🚫 ОТВЕТ ТУПОМУ РЕДДИТУ И ХЕЙТЕРАМ</h2>
-                <p><strong>Пока токсичные мужики кидали крысиные репорты, а их тупые автоматические боты выписывали баны — я просто продолжал кодить!</strong></p>
-                <p>Вы думали, что забанив аккаунт, вы остановите разработку? Как бы не так! Мои мозги и навыки программирования вы забанить не сможете. Мой старый профиль уничтожен роботами, поэтому отныне весь самый сочный контент, видеоролики, скриншоты тестов и файлы моих проектов переезжают сюда — на свободный GitHub, где нет глупой модерации!</p>
-                <p><em>«Здесь будут все проекты на GitHub. Почему же? Модераторы Reddit забанили меня.» — из README</em></p>
-            </div>
+    <!-- ПРОЕКТЫ -->
+    <div class="tab-content" id="tab-projects">
+        <div class="card full">
+            <h2>🛠️ Мои Главные Проекты</h2>
+            <p>Каждый проект — это шаг вперёд. От идеи до кода, от кода до теста, от теста до релиза.</p>
+        </div>
 
-            <div class="card blue-neon">
-                <h2>⚡ Что нового</h2>
-                <ul>
-                    <li>Создан репозиторий <strong>ShellClock</strong> (Kotlin) — часы для Android.</li>
-                    <li>Добавлен репозиторий <strong>ShellVR</strong> — VR-проекты.</li>
-                    <li>Создан репозиторий <strong>ActiveRepos</strong> (HTML) — активное создание репозиториев.</li>
-                    <li>Общее количество контрибуций выросло до <strong>41</strong> за год.</li>
-                </ul>
-            </div>
+        <div class="card blue">
+            <h2>💿 ShellOS</h2>
+            <p><strong>Статус:</strong> В разработке</p>
+            <p>Разработка собственной ОС на языке <strong>MangoCode</strong>. Продумываю логику ядра, интерфейс и файловую систему.</p>
+            <ul><li>Собственное ядро</li><li>Минималистичный интерфейс</li><li>Заточка под слабое железо</li></ul>
+        </div>
 
-            <div class="card green-neon">
-                <h2>📊 Статус разработки</h2>
-                <div class="spec-grid">
-                    <div class="spec-item">
-                        <div class="spec-label">ShellOS</div>
-                        <div class="spec-value">В разработке</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">ShellClock</div>
-                        <div class="spec-value">v5 (Kotlin)</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">VR-проекты</div>
-                        <div class="spec-value">Тестирование</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">GitHub Pages</div>
-                        <div class="spec-value">Онлайн</div>
-                    </div>
-                </div>
-            </div>
+        <div class="card green">
+            <h2>🕰️ ShellClock</h2>
+            <p><strong>Статус:</strong> v5 (Kotlin)</p>
+            <p>Современные часы для Android на Jetpack Compose. Мировое время, секундомер, таймер, будильник.</p>
+            <ul><li>14 тем + RGB</li><li>Мировое время (100+ городов)</li><li>Экспорт/импорт</li></ul>
+        </div>
 
-            <div class="card purple-neon full-width">
-                <h2>📈 Активность на GitHub</h2>
-                <p>41 контрибуция за последний год. 4 публичных репозитория.</p>
-                <div class="contribution-bar">
-                    <span class="contribution-label">Ноябрь 2026</span>
-                    <div class="contribution-fill">
-                        <div class="contribution-progress" style="width: 100%;"></div>
-                    </div>
+        <div class="card">
+            <h2>🥽 Unity & VR (ShellVR)</h2>
+            <p><strong>Статус:</strong> Тестирование</p>
+            <p>Создание игр, механик и тесты виртуальной реальности под гарнитуру Meta Quest 2.</p>
+            <ul><li>Трекинг рук</li><li>Физика объектов</li><li>Оптимизация под Quest 2</li></ul>
+        </div>
+
+        <div class="card orange">
+            <h2>🧰 adelka4745-Toolkit</h2>
+            <p><strong>Статус:</strong> В разработке</p>
+            <p>WinForms + WebView2 приложение для Windows с фронтендом на HTML/CSS/JS.</p>
+            <ul><li>WinForms + WebView2</li><li>MSIX/APPX упаковка</li><li>HTML/CSS/JS фронтенд</li></ul>
+        </div>
+    </div>
+
+    <!-- РЕПОЗИТОРИИ -->
+    <div class="tab-content" id="tab-repos">
+        <div class="card full">
+            <h2>📦 Мои Репозитории на GitHub</h2>
+            <p>Все проекты теперь живут здесь. Главные репозитории — <strong>adelka4745</strong>, <strong>adelka4745-Toolkit</strong> и <strong>ShellClock</strong>.</p>
+        </div>
+
+        <div class="card blue">
+            <h2>📘 adelka4745</h2>
+            <div class="repo-card">
+                <div class="repo-name">adelka4745</div>
+                <div class="repo-desc">Мои проекты теперь живут именно здесь как главность.</div>
+                <span class="repo-lang">HTML</span>
+            </div>
+            <p>Главный репозиторий портфолио.</p>
+        </div>
+
+        <div class="card orange">
+            <h2>🧰 adelka4745-Toolkit</h2>
+            <div class="repo-card">
+                <div class="repo-name">adelka4745-Toolkit</div>
+                <div class="repo-desc">WinForms + WebView2 app packaged as MSIX/APPX for Windows, with HTML/CSS/JS frontend</div>
+                <span class="repo-lang">CSS</span>
+            </div>
+            <p>Набор инструментов для Windows.</p>
+        </div>
+
+        <div class="card green">
+            <h2>🕰️ ShellClock</h2>
+            <div class="repo-card">
+                <div class="repo-name">ShellClock</div>
+                <div class="repo-desc">Программа для часиков. Простенькая.</div>
+                <span class="repo-lang">Kotlin</span>
+            </div>
+            <p>Приложение-часы для Android.</p>
+        </div>
+
+        <div class="card">
+            <h2>📂 ActiveRepos</h2>
+            <div class="repo-card">
+                <div class="repo-name">ActiveRepos</div>
+                <div class="repo-desc">Активное создание моих репозиториев.</div>
+                <span class="repo-lang">HTML</span>
+            </div>
+            <p>Репозиторий для отслеживания активности.</p>
+        </div>
+    </div>
+
+    <!-- ТЕХНИКА -->
+    <div class="tab-content" id="tab-tech">
+        <div class="card blue full">
+            <h2>💻 Мой Парк Техники</h2>
+            <p>Всё, на чём я работаю, тестирую и играю.</p>
+        </div>
+
+        <div class="card">
+            <h2>🖥️ Ноутбуки</h2>
+            <ul>
+                <li><strong>Lenovo S145-14AST</strong> — AMD A6-9225, 4 ГБ, Windows 10 LTSC.</li>
+                <li><strong>HP ProBook 450 G2</strong> — Intel Core i5-4210U, 6 ГБ, SSD ADATA SU650.</li>
+                <li><strong>ASUS Vivobook Pro 15</strong> (родительский) — Ryzen 5 5600H, 8 ГБ.</li>
+                <li><strong>Maibenben</strong> (родительский) — Ryzen 5 5500U, 16 ГБ.</li>
+            </ul>
+        </div>
+
+        <div class="card green">
+            <h2>📱 Телефоны и планшеты</h2>
+            <ul>
+                <li><strong>TECNO Spark 40C KM4K</strong> — Helio G81, 8 ГБ, Android 15, разблокированный загрузчик.</li>
+                <li><strong>Blackview Tab 15</strong> — Unisoc T606, Android.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🎮 Консоли и VR</h2>
+            <ul>
+                <li><strong>Xbox One S</strong> — игры, обновления, тесты.</li>
+                <li><strong>Meta Quest 2</strong> — основная VR-платформа для тестов.</li>
+            </ul>
+        </div>
+
+        <div class="card blue">
+            <h2>🔧 Периферия</h2>
+            <ul>
+                <li>VS Code (github.dev) — основная среда разработки.</li>
+                <li>Blender — 3D-модели для VR.</li>
+                <li>Unity — движок для игр и VR.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ИНСТРУМЕНТЫ -->
+    <div class="tab-content" id="tab-tools">
+        <div class="card full">
+            <h2>🔧 Мой Стек Инструментов</h2>
+            <p>Всё, чем я пользуюсь для разработки. Поделено между разными ноутбуками.</p>
+        </div>
+
+        <div class="card blue full">
+            <h2>💻 Среда разработки</h2>
+            <div class="tools-grid">
+                <div class="tool-item"><div class="tool-icon">📝</div><div class="tool-name">VS Code</div></div>
+                <div class="tool-item"><div class="tool-icon">🔀</div><div class="tool-name">Git</div></div>
+                <div class="tool-item"><div class="tool-icon">🐧</div><div class="tool-name">WSL</div></div>
+                <div class="tool-item"><div class="tool-icon">📦</div><div class="tool-name">Repo</div></div>
+                <div class="tool-item"><div class="tool-icon">🎮</div><div class="tool-name">Unity</div></div>
+                <div class="tool-item"><div class="tool-icon">🌐</div><div class="tool-name">github.dev</div></div>
+            </div>
+        </div>
+
+        <div class="card green">
+            <h2>🖥️ Операционные системы</h2>
+            <ul>
+                <li><strong>Windows 10 LTSC</strong> — основная на Lenovo.</li>
+                <li><strong>Windows 10</strong> — на HP ProBook.</li>
+                <li><strong>Linux (WSL)</strong> — для разработки.</li>
+                <li><strong>Android 15 (HiOS 15)</strong> — на TECNO.</li>
+            </ul>
+        </div>
+
+        <div class="card orange">
+            <h2>🛠️ Упаковка и сборка</h2>
+            <ul>
+                <li><strong>MSIX / APPX</strong> — упаковка Windows-приложений.</li>
+                <li><strong>WinForms</strong> — для десктопных приложений.</li>
+                <li><strong>WebView2</strong> — для встраивания HTML/CSS/JS.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>📚 Что изучаю</h2>
+            <ul>
+                <li>Python — базовый уровень.</li>
+                <li>Разработка языков программирования.</li>
+                <li>VR-разработка под Unity.</li>
+                <li>Создание операционных систем.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ЧЕРЕПАХИ -->
+    <div class="tab-content" id="tab-turtles">
+        <div class="card full">
+            <h2>🐢 Террариум / Мои Питомцы</h2>
+            <p>Черепахи — это не просто питомцы. Это символ моего проекта и память о прошлом.</p>
+        </div>
+
+        <div class="card blue">
+            <h2>🟢 Живые</h2>
+            <div class="turtle-box">
+                <div class="turtle-title">Красноух 🟢</div>
+                <p>Мой живой питомец. Красноухая черепаха, которая живёт в аквариуме и следит за тем, как я пишу код.</p>
+            </div>
+        </div>
+
+        <div class="card red">
+            <h2>🔴 Ушедшие</h2>
+            <div class="turtle-box turtle-dead">
+                <div class="turtle-title">Краснопук (R.I.P.) 🔴</div>
+                <p>Мой прошлый питомец, который ушёл. Память о нём навсегда останется в коде и на этой странице.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📜 Лор</h2>
+            <ul>
+                <li><strong>Красноух</strong> — черепаха с вилкой. Символ проекта.</li>
+                <li><strong>Краснопук</strong> — черепаха с бананом. Ушедший друг.</li>
+                <li><strong>Киви</strong> — мудрая сова с книгой.</li>
+                <li><strong>Сова-Ракушечница</strong> — живёт в ракушке.</li>
+            </ul>
+        </div>
+
+        <div class="card green">
+            <h2>💚 Память</h2>
+            <p>Краснопук останется в коде навсегда. Его имя будет в названиях функций и переменных.</p>
+        </div>
+    </div>
+
+    <!-- ОБО МНЕ -->
+    <div class="tab-content" id="tab-about">
+        <div class="card full">
+            <h2>👤 Кто я</h2>
+            <p><strong>adelka4745</strong> — 10 лет, разработчик, тестировщик, создатель. Живу в Казани, иногда бываю в Буинске и Чернышевке. Пишу свою ОС, разрабатываю VR и изучаю программирование.</p>
+            <!-- ССЫЛКИ НА GITHUB И TELEGRAM -->
+            <div style="margin-top: 15px;">
+                <a href="https://github.com/adelka4745" class="link-btn" target="_blank">Мой GitHub</a>
+                <a href="https://t.me/adelka4745" class="link-btn link-tg" target="_blank">Мой Telegram</a>
+            </div>
+        </div>
+
+        <div class="card blue">
+            <h2>📍 Факты</h2>
+            <ul>
+                <li>Родился <strong>17 июня</strong>.</li>
+                <li>10 лет, учусь в школе.</li>
+                <li>Русский, национальность — татарин.</li>
+                <li>Живу в Казани, езжу в Буинск и Чернышевку.</li>
+            </ul>
+        </div>
+
+        <div class="card green">
+            <h2>🎯 Навыки</h2>
+            <ul>
+                <li>HTML, CSS — вёрстка сайтов.</li>
+                <li>Kotlin — разработка приложений для Android.</li>
+                <li>Python — базовый уровень.</li>
+                <li>Разблокировка загрузчиков Android.</li>
+                <li>Диагностика б/у техники.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>📅 Таймлайн</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">17 июня</div>
+                    <p>День рождения.</p>
                 </div>
-                <div class="contribution-bar">
-                    <span class="contribution-label">Октябрь 2026</span>
-                    <div class="contribution-fill">
-                        <div class="contribution-progress" style="width: 80%;"></div>
-                    </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">21 августа 2026</div>
+                    <p>Купил Meta Quest 2 в Казани за 19 999 ₽.</p>
                 </div>
-                <div class="contribution-bar">
-                    <span class="contribution-label">Сентябрь 2026</span>
-                    <div class="contribution-fill">
-                        <div class="contribution-progress" style="width: 40%;"></div>
-                    </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">9 октября 2026</div>
+                    <p>Создал первые репозитории на GitHub.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Ноябрь 2026</div>
+                    <p>Создал репозиторий ShellClock (Kotlin).</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Планы</div>
+                    <p>ShellOS, MangoCode, свой ЯП, VR-игры.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ========== TAB: ПРОЕКТЫ ========== -->
-        <div class="tab-content" id="tab-projects">
-            <div class="card purple-neon full-width">
-                <h2>🛠️ Мои Главные Проекты</h2>
-                <p>Каждый проект — это шаг вперёд. От идеи до кода, от кода до теста, от теста до релиза.</p>
-            </div>
-
-            <div class="card blue-neon">
-                <h2>💿 ShellOS</h2>
-                <p><strong>Статус:</strong> <span class="badge badge-blue">В разработке</span></p>
-                <p>Разработка собственной полноценной операционной системы на своём языке <strong>MangoCode</strong>. Продумываю логику ядра, интерфейс, файловую систему и внутреннюю структуру.</p>
-                <ul>
-                    <li>Собственное ядро</li>
-                    <li>Минималистичный интерфейс</li>
-                    <li>Поддержка базовых приложений</li>
-                    <li>Заточка под слабое железо</li>
-                    <li>Свой язык программирования</li>
-                </ul>
-            </div>
-
-            <div class="card green-neon">
-                <h2>🕰️ ShellClock</h2>
-                <p><strong>Статус:</strong> <span class="badge badge-green">v5 (Kotlin)</span></p>
-                <p>Современные часы для Android на Jetpack Compose. Включает мировое время, секундомер, таймер, будильник и 14 тем оформления.</p>
-                <ul>
-                    <li>14 тем + RGB-палитра</li>
-                    <li>Мировое время (более 100 городов)</li>
-                    <li>Секундомер и таймер</li>
-                    <li>Экспорт/импорт настроек</li>
-                    <li>Пасхалка для разработчиков</li>
-                </ul>
-            </div>
-
-            <div class="card purple-neon">
-                <h2>🥽 Unity & VR (ShellVR)</h2>
-                <p><strong>Статус:</strong> <span class="badge badge-purple">Тестирование</span></p>
-                <p>Создание игр, механик и тесты виртуальной реальности под гарнитуру Meta Quest 2.</p>
-                <ul>
-                    <li>Тесты трекинга рук</li>
-                    <li>Физика объектов в VR</li>
-                    <li>Взаимодействие с UI</li>
-                    <li>Оптимизация под Quest 2</li>
-                </ul>
-            </div>
-
-            <div class="card orange-neon">
-                <h2>🧰 adelka4745-Toolkit</h2>
-                <p><strong>Статус:</strong> <span class="badge badge-orange">В разработке</span></p>
-                <p>WinForms + WebView2 приложение, упакованное как MSIX/APPX для Windows, с фронтендом на HTML/CSS/JS.</p>
-                <ul>
-                    <li>WinForms + WebView2</li>
-                    <li>MSIX/APPX упаковка</li>
-                    <li>HTML/CSS/JS фронтенд</li>
-                    <li>Windows-приложение</li>
-                </ul>
-            </div>
+        <div class="card red">
+            <h2>💬 Принцип</h2>
+            <p><strong>«Пока они кидают репорты — я пишу код. Пока они банят — я учусь. Пока они хейтят — я создаю.»</strong></p>
+            <p>— adelka4745</p>
         </div>
+    </div>
+</main>
 
-        <!-- ========== TAB: РЕПОЗИТОРИИ ========== -->
-        <div class="tab-content" id="tab-repos">
-            <div class="card purple-neon full-width">
-                <h2>📦 Мои Репозитории на GitHub</h2>
-                <p>Все проекты теперь живут здесь. Главные репозитории — <strong>adelka4745</strong>, <strong>adelka4745-Toolkit</strong> и <strong>ShellClock</strong>.</p>
-            </div>
+<footer>
+    &copy; 2026 <span class="glow">adelka4745</span>. Написано на VS Code (github.dev) без использования левых серверов.
+</footer>
 
-            <div class="card blue-neon">
-                <h2>📘 adelka4745</h2>
-                <div class="repo-card">
-                    <div class="repo-name">adelka4745</div>
-                    <div class="repo-desc">Мои проекты теперь живут именно здесь как главность.</div>
-                    <span class="repo-lang">HTML</span>
-                    <span class="badge badge-green" style="margin-left: 8px;">Public</span>
-                </div>
-                <p>Главный репозиторий портфолио. Здесь будет весь основной контент: сайт, проекты, тесты.</p>
-            </div>
-
-            <div class="card orange-neon">
-                <h2>🧰 adelka4745-Toolkit</h2>
-                <div class="repo-card">
-                    <div class="repo-name">adelka4745-Toolkit</div>
-                    <div class="repo-desc">WinForms + WebView2 app packaged as MSIX/APPX for Windows, with HTML/CSS/JS frontend</div>
-                    <span class="repo-lang">CSS</span>
-                    <span class="badge badge-green" style="margin-left: 8px;">Public</span>
-                </div>
-                <p>Набор инструментов для Windows. WinForms + WebView2, упакованный в MSIX/APPX, с фронтендом на HTML/CSS/JS.</p>
-            </div>
-
-            <div class="card green-neon">
-                <h2>🕰️ ShellClock</h2>
-                <div class="repo-card">
-                    <div class="repo-name">ShellClock</div>
-                    <div class="repo-desc">Программа для часиков. Простенькая.</div>
-                    <span class="repo-lang">Kotlin</span>
-                    <span class="badge badge-green" style="margin-left: 8px;">Public</span>
-                </div>
-                <p>Приложение-часы для Android. Мировое время, будильник, таймер, секундомер и 14 тем.</p>
-            </div>
-
-            <div class="card purple-neon">
-                <h2>📂 ActiveRepos</h2>
-                <div class="repo-card">
-                    <div class="repo-name">ActiveRepos</div>
-                    <div class="repo-desc">Активное создание моих репозиториев.</div>
-                    <span class="repo-lang">HTML</span>
-                    <span class="badge badge-green" style="margin-left: 8px;">Public</span>
-                </div>
-                <p>Репозиторий для отслеживания активности и создания новых проектов.</p>
-            </div>
-
-            <div class="card green-neon full-width">
-                <h2>📊 Статистика репозиториев</h2>
-                <div class="spec-grid">
-                    <div class="spec-item">
-                        <div class="spec-label">Всего репозиториев</div>
-                        <div class="spec-value">4 публичных</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">Основные языки</div>
-                        <div class="spec-value">HTML, CSS, Kotlin</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">Контрибуций за год</div>
-                        <div class="spec-value">41</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-label">Первый репозиторий</div>
-                        <div class="spec-value">Октябрь 2026</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== TAB: ТЕХНИКА ========== -->
-        <div class="tab-content" id="tab-tech">
-            <div class="card blue-neon full-width">
-                <h2>💻 Мой Парк Техники</h2>
-                <p>Всё, на чём я работаю, тестирую и играю. Каждое устройство — это инструмент.</p>
-            </div>
-
-            <div class="card purple-neon">
-                <h2>🖥️ Ноутбуки</h2>
-                <ul>
-                    <li><strong>Lenovo S145-14AST</strong> — AMD A6-9225, 4 ГБ ОЗУ, 119 ГБ SSD, Windows 10 LTSC.</li>
-                    <li><strong>HP ProBook 450 G2</strong> — Intel Core i5-4210U, 6 ГБ ОЗУ (2+4 ГБ DDR3), SSD ADATA SU650, Intel HD Graphics + AMD Radeon R5 M255, экран 15.6".</li>
-                    <li><strong>ASUS Vivobook Pro 15</strong> (родительский) — Ryzen 5 5600H, 8 ГБ ОЗУ, 512 ГБ SSD.</li>
-                    <li><strong>Maibenben</strong> (родительский) — Ryzen 5 5500U, 16 ГБ ОЗУ, 477 ГБ SSD.</li>
-                </ul>
-            </div>
-
-            <div class="card green-neon">
-                <h2>📱 Телефоны и планшеты</h2>
-                <ul>
-                    <li><strong>TECNO Spark 40C KM4K</strong> — Helio G81, 8 ГБ ОЗУ, 128 ГБ памяти, 6000 мАч, Android 15 (HiOS 15), разблокированный загрузчик, поиск Root/Magisk.</li>
-                    <li><strong>Blackview Tab 15</strong> — Unisoc T606, Android.</li>
-                </ul>
-            </div>
-
-            <div class="card purple-neon">
-                <h2>🎮 Консоли и VR</h2>
-                <ul>
-                    <li><strong>Xbox One S</strong> — игры, обновления, тесты.</li>
-                    <li><strong>Meta Quest 2</strong> — б/у за 19 999 ₽, линзы Френеля, контроллеры с кольцами. Основная VR-платформа для тестов.</li>
-                </ul>
-            </div>
-
-            <div class="card blue-neon">
-                <h2>🔧 Периферия</h2>
-                <ul>
-                    <li>VS Code (github.dev) — основная среда разработки.</li>
-                    <li>Blender — 3D-модели для VR.</li>
-                    <li>Unity — движок для игр и VR.</li>
-                    <li>GitHub — хостинг кода и портфолио.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ========== TAB: ИНСТРУМЕНТЫ ========== -->
-        <div class="tab-content" id="tab-tools">
-            <div class="card purple-neon full-width">
-                <h2>🔧 Мой Стек Инструментов</h2>
-                <p>Всё, чем я пользуюсь для разработки. Поделено между разными ноутбуками.</p>
-            </div>
-
-            <div class="card blue-neon full-width">
-                <h2>💻 Среда разработки</h2>
-                <div class="tools-grid">
-                    <div class="tool-item">
-                        <div class="tool-icon">📝</div>
-                        <div class="tool-name">VS Code 2026</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="tool-icon">🔀</div>
-                        <div class="tool-name">Git</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="tool-icon">🐧</div>
-                        <div class="tool-name">WSL</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="tool-icon">📦</div>
-                        <div class="tool-name">Repo</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="tool-icon">🎮</div>
-                        <div class="tool-name">Unity</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="tool-icon">🌐</div>
-                        <div class="tool-name">github.dev</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card green-neon">
-                <h2>🖥️ Операционные системы</h2>
-                <ul>
-                    <li><strong>Windows 10 LTSC</strong> — основная на Lenovo.</li>
-                    <li><strong>Windows 10</strong> — на HP ProBook.</li>
-                    <li><strong>Linux (WSL)</strong> — для разработки и тестов.</li>
-                    <li><strong>Android 15 (HiOS 15)</strong> — на TECNO.</li>
-                </ul>
-            </div>
-
-            <div class="card orange-neon">
-                <h2>🛠️ Упаковка и сборка</h2>
-                <ul>
-                    <li><strong>MSIX / APPX</strong> — упаковка Windows-приложений.</li>
-                    <li><strong>WinForms</strong> — для десктопных приложений.</li>
-                    <li><strong>WebView2</strong> — для встраивания HTML/CSS/JS.</li>
-                    <li><strong>HTML / CSS / JS</strong> — фронтенд.</li>
-                </ul>
-            </div>
-
-            <div class="card purple-neon">
-                <h2>📚 Что изучаю</h2>
-                <ul>
-                    <li>Python — базовый уровень.</li>
-                    <li>Разработка языков программирования.</li>
-                    <li>VR-разработка под Unity.</li>
-                    <li>Создание операционных систем.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ========== TAB: ЧЕРЕПАХИ ========== -->
-        <div class="tab-content" id="tab-turtles">
-            <div class="card purple-neon full-width">
-                <h2>🐢 Террариум / Мои Питомцы</h2>
-                <p>Черепахи — это не просто питомцы. Это символ моего проекта и память о прошлом.</p>
-            </div>
-
-            <div class="card blue-neon">
-                <h2>🟢 Живые</h2>
-                <div class="turtle-container">
-                    <div class="turtle-box turtle-alive">
-                        <div class="turtle-title">Красноух 🟢</div>
-                        <p>Мой живой домашний питомец. Красноухая черепаха, которая живёт в аквариуме и следит за тем, как я пишу код для ShellOS.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card red-neon">
-                <h2>🔴 Ушедшие</h2>
-                <div class="turtle-container">
-                    <div class="turtle-box turtle-dead">
-                        <div class="turtle-title">Краснопук (R.I.P.) 🔴</div>
-                        <p>Мой прошлый питомец, который, к сожалению, ушёл. Память о нём навсегда останется в коде и на этой странице.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card purple-neon">
-                <h2>📜 Лор</h2>
-                <ul>
-                    <li><strong>Красноух</strong> — черепаха с вилкой. Символ проекта.</li>
-                    <li><strong>Краснопук</strong> — черепаха с бананом. Ушедший друг.</li>
-                    <li><strong>Киви</strong> — мудрая сова с книгой.</li>
-                    <li><strong>Обычная сова</strong> — следит за порядком.</li>
-                    <li><strong>Сова-Ракушечница</strong> — живёт в ракушке, жемчуг светится.</li>
-                    <li><strong>Сухопутные</strong> — живут в мусорке, любят спать.</li>
-                </ul>
-            </div>
-
-            <div class="card green-neon">
-                <h2>💚 Память</h2>
-                <p>Краснопук останется в коде навсегда. Его имя будет в названиях функций, переменных и, возможно, в будущем логотипе одного из проектов.</p>
-            </div>
-        </div>
-
-        <!-- ========== TAB: ОБО МНЕ ========== -->
-        <div class="tab-content" id="tab-about">
-            <div class="card purple-neon full-width">
-                <h2>👤 Кто я</h2>
-                <p><strong>adelka4745</strong> — 10 лет, разработчик, тестировщик, создатель. Живу в Казани, иногда бываю в Буинске и Чернышевке. Пишу свою ОС, разрабатываю VR и изучаю программирование.</p>
-            </div>
-
-            <div class="card blue-neon">
-                <h2>📍 Факты</h2>
-                <ul>
-                    <li>Родился <strong>17 июня</strong>.</li>
-                    <li>10 лет, учусь в школе.</li>
-                    <li>Русский, национальность — татарин.</li>
-                    <li>Живу в Казани, езжу в Буинск и Чернышевку.</li>
-                    <li>Храню ноутбуки, телефоны, консоли.</li>
-                    <li>Помогаю с техникой.</li>
-                </ul>
-            </div>
-
-            <div class="card green-neon">
-                <h2>🎯 Навыки</h2>
-                <ul>
-                    <li>HTML, CSS — вёрстка сайтов.</li>
-                    <li>Kotlin — разработка приложений для Android.</li>
-                    <li>Python — базовый уровень.</li>
-                    <li>Разблокировка загрузчиков Android.</li>
-                    <li>Поиск Root/Magisk.</li>
-                    <li>Диагностика б/у техники.</li>
-                    <li>Тестирование ИИ на прочность.</li>
-                </ul>
-            </div>
-
-            <div class="card purple-neon">
-                <h2>📅 Таймлайн</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">17 июня</div>
-                        <p>День рождения.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">21 августа 2026</div>
-                        <p>Купил Meta Quest 2 в Казани за 19 999 ₽.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">9 октября 2026</div>
-                        <p>Создал первые репозитории на GitHub: adelka4745 и adelka4745-Toolkit.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Ноябрь 2026</div>
-                        <p>Создал репозиторий ShellClock (Kotlin) — часы для Android.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Планы</div>
-                        <p>ShellOS, MangoCode, свой ЯП, VR-игры.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card blue-neon">
-                <h2>🌐 Ссылка</h2>
-                <a href="https://github.com/adelka4745" class="link-btn link-purple" target="_blank">GitHub</a>
-            </div>
-
-            <div class="card red-neon">
-                <h2>💬 Принцип</h2>
-                <p><strong>«Пока они кидают репорты — я пишу код. Пока они банят — я учусь. Пока они хейтят — я создаю.»</strong></p>
-                <p>— adelka4745</p>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        &copy; 2026 <span class="footer-glow">adelka4745</span>. Написано на VS Code (github.dev) без использования левых серверов.
-    </footer>
-
-    <!-- ===== TABS SCRIPT ===== -->
-    <script>
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                button.classList.add('active');
-
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
+<script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
         });
-    </script>
-
+    });
+</script>
 </body>
 </html>
